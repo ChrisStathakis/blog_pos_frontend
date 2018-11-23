@@ -18,16 +18,6 @@ export default class ProductGrid extends React.Component{
         }
     }
 
-    static childContextTypes = {
-        clearFilters: PropTypes.func,
-    };
-
-    getChildContext(){
-        return{
-            clearFilters: this.handleClearFilters,
-        }
-    }
-
     getCategories(){
         const endpoint = CATEGORYS_ENDPOINT;
         const thisComp = this;

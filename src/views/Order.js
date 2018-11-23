@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {Container, Row, Col} from 'reactstrap';
 import MyNavbar from '../components/Navbar.js';
@@ -19,18 +18,6 @@ class Order extends React.Component{
             order_items:[],
             order_id: '',
             doneLoading: false
-        }
-    }
-
-    static childContextTypes = {
-        handleAddOrEditProduct: PropTypes.func,
-        changeQty: PropTypes.func
-    };
-
-    getChildContext(){
-        return {
-            handleAddOrEditProduct: this.handleAddOrEditProduct,
-            changeQty: this.changeQty
         }
     }
 
@@ -93,6 +80,7 @@ class Order extends React.Component{
                                 {doneLoading ?
                                     <ProductGrid
                                         handleSelectedCategories={this.handleSelectedCategories}
+
                                     />
                                 : <p>No data</p>
                                 }

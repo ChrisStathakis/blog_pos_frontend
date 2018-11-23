@@ -6,7 +6,6 @@ import MyNavbar from '../components/Navbar.js';
 import TableCart from '../components/TableCard.js'
 import {fetchData} from '../helpers/fetch_data.js'
 import {TABLES_ENDPOINT, ORDERS_ENDPOINT} from '../helpers/endpoints.js';
-import {TABLE_DETAIL_ENDPOINT} from "../helpers/endpoints";
 import {lookupOptionsPOST} from "../helpers/fetch_data";
 
 
@@ -32,12 +31,6 @@ class Homepage extends React.Component {
       this.getTables()
   };
 
-  getTable = (id) => {
-      const endpoint = TABLE_DETAIL_ENDPOINT + `/${id}/`;
-      const thisComp = this;
-      fetchData(endpoint, thisComp, 'table', false)
-  };
-
   newOrder = (id) => {
       const thisComp = this;
       const data = {
@@ -45,7 +38,7 @@ class Homepage extends React.Component {
           table: id,
           active: true
       };
-      fetch(ORDERS_ENDPOINT, lookupOptionsPOST).then(
+      fetch(ORDERS_ENDPOINT, lookupOptionsPOST(data)).then(
           function(response) {
               return response.json()
           }
@@ -59,7 +52,7 @@ class Homepage extends React.Component {
 
   componentDidMount(){
       this.getTables();
-      setInterval(this.updateTables, 5000);
+      setInterval(this.updateTables, 10000);
   }
 
   render() {
@@ -73,19 +66,17 @@ class Homepage extends React.Component {
       return (
           <div>
               <MyNavbar/>
-              <Container key={1}>{doneLoading !== false ? <MyContainer key={1} tables={tables} newOrder={this.newOrder} /> : <p>No data</p>}
+              <Container key={1}>
+                  {doneLoading !== false ?
+                      <MyContainer key={323} tables={tables} newOrder={this.newOrder} />
+                      : <p>No data</p>
+                  }
               </Container>
           </div>
       )
   }
 }
 
-class FilterContainer extends React.Component {
-
-  render(){
-    return <p>Works!</p>
-  }
-}
 
 class MyContainer extends React.Component{
 
@@ -99,18 +90,14 @@ class MyContainer extends React.Component{
         return (
             <div>
                 <Row>
-                    <Col xs="8">
+                    <Col xs="12">
                         <Row><h4 className='header'>Title</h4></Row>
                         <Row>
                             { tables.map((table, index)=>(
-                                <TableCart table={table} newOrder={this.props.newOrder} />
+                                <TableCart key={index} table={table} newOrder={this.props.newOrder} />
                             ))
                             }
                          </Row>
-                    </Col>
-
-                    <Col xs="4">
-                        <FilterContainer />
                     </Col>
                 </Row>
             </div>

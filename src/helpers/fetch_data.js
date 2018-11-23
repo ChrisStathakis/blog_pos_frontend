@@ -36,19 +36,6 @@ function lookupOptionsPUT(data) {
     }
 }
 
-
-function postData(endpoint, data) {
-    fetch(endpoint, lookupOptionsPOST).then(
-        function(response) {
-            return response.json()
-        }
-    ).then(
-        function(responseData) {
-            console.log(responseData)
-        }
-    )
-}
-
 function putData(endpoint, data) {
     let lookupOptions = {
         method: 'PUT',
@@ -200,4 +187,4 @@ function addOrEditProduct(order_id, product_id, thisComp) {
 
 
 
-export {fetchData, postData, postQtyChange, putData, addOrEditProduct, lookupOptionsGET, lookupOptionsPOST}
+export {fetchData, postQtyChange, putData, addOrEditProduct, lookupOptionsGET, lookupOptionsPOST}
