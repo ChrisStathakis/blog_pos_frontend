@@ -13,19 +13,18 @@ class Filters extends React.Component {
         }
     }
 
-    static PropTypes = {
-        categories: PropTypes.array
-    };
 
-    static contextTypes = {
-        clearFilters: PropTypes.func
+    static PropTypes = {
+        categories: PropTypes.array.isRequired,
+        clearFilters: PropTypes.func.isRequired,
+        handleSelectedCategories: PropTypes.func.isRequired
     };
 
     handleClear = () => {
         this.setState({
             selected_categories: ''
         });
-        this.context.clearFilters()
+        this.props.clearFilters()
 
     };
 

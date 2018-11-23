@@ -18,6 +18,11 @@ export default class ProductGrid extends React.Component{
         }
     }
 
+    static propTypes = {
+        handleAddOrEditProduct: PropTypes.func.isRequired,
+        handleSelectedCategories: PropTypes.func.isRequired
+    }
+
     getCategories(){
         const endpoint = CATEGORYS_ENDPOINT;
         const thisComp = this;
@@ -52,6 +57,10 @@ export default class ProductGrid extends React.Component{
         this.getProducts(endpoint)
     };
 
+    handleAddOrEditProduct = (id) => {
+        this.props.handleAddOrEditProduct(id)
+    }
+
     componentDidMount(){
         const endpoint = PRODUCTS_ENDPOINT;
         this.getCategories();
@@ -71,6 +80,7 @@ export default class ProductGrid extends React.Component{
                         categories={categories}
                         handleSelectedCategories={this.handleSelectedCategories}
                         handleClearFilters={this.handleClearFilters}
+                        clearFilters ={this.handleClearFilters}
                         />
                 </div>
             )
@@ -85,6 +95,8 @@ export default class ProductGrid extends React.Component{
 
                     <ProductTable 
                         products={this.state.products}
+                        handleAddOrEditProduct={this.handleAddOrEditProduct}
+
                     />
                 </div>
             )
@@ -92,7 +104,16 @@ export default class ProductGrid extends React.Component{
     }
 }
 
-class ProductTable extends React.Component{
+class ProductTable extends React.Component {
+
+    static propTypes = {
+        handleAddOrEditProduct: PropTypes.func.isRequired,
+        products: PropTypes.string.isRequired
+    }
+
+    handleAddOrEditProduct = (id) => {
+        this.props.handleAddOrEditProduct(id)
+    }
 
     render(){
         const products = this.props.products;
@@ -109,7 +130,10 @@ class ProductTable extends React.Component{
                 </thead>
                 <tbody>
                     {products.map((product, index)=>(
-                        <ProductTableTr product={product} />
+                        <ProductTableTr 
+                            product={product} 
+                            handleAddOrEditProduct={this.handleAddOrEditProduct}
+                        />
                     ))}
                 </tbody>
             </Table>
@@ -119,16 +143,13 @@ class ProductTable extends React.Component{
 
 class ProductTableTr extends React.Component{
 
-    static PropTypes = {
-        product: PropTypes.object
-    };
-
-    static contextTypes = {
-        handleAddOrEditProduct: PropTypes.func
-    };
+    static propTypes = {
+        handleAddOrEditProduct: PropTypes.func.isRequired,
+        product: PropTypes.object.isRequired
+    }
 
     addProduct = () => {
-        this.context.handleAddOrEditProduct(this.props.product.id)
+        this.props.handleAddOrEditProduct(this.props.product.id)
     };
 
     render(){

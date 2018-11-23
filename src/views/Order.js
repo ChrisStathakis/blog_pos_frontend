@@ -53,12 +53,22 @@ class Order extends React.Component{
                     active: false,
                 };
                 const endpoint = ORDER_ENDPOINT + order.id + '/';
-                putData(endpoint, data,);
+                const lookupOptions = {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify(data)
+                }
+                fetch(endpoint, lookupOptions)
+                .then(resp => resp.json())
+                .then(repsData => {
+                    thisComp.props.history.push('/')
+                })
                 break;
             default:
-                console.log('oups!')
+                thisComp.props.history.push('/')
         }
-        thisComp.props.history.push('/')
     };
 
     componentDidMount(){
@@ -80,7 +90,7 @@ class Order extends React.Component{
                                 {doneLoading ?
                                     <ProductGrid
                                         handleSelectedCategories={this.handleSelectedCategories}
-
+                                        handleAddOrEditProduct={this.handleAddOrEditProduct}
                                     />
                                 : <p>No data</p>
                                 }
@@ -94,6 +104,7 @@ class Order extends React.Component{
                                         order_data={this.state.order_data}
                                         order_items={this.state.order_items}
                                         handleTableActions={this.handleTableActions}
+                                        changeQty={this.changeQty}
                                     />
                                     :
                                     <p>No Data</p>

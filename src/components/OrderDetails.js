@@ -5,11 +5,13 @@ import { Table,  Card, CardHeader,
 
 export default class OrderDetails extends React.Component{
 
+
     static PropTypes = {
         handleTableActions: PropTypes.func,
         handleBack: PropTypes.func,
         order_items: PropTypes.array,
-        order_data: PropTypes.object
+        order_data: PropTypes.object,
+        changeQty: PropTypes.func.isRequired
     };
 
     handleCloseTable = () => {
@@ -18,6 +20,10 @@ export default class OrderDetails extends React.Component{
     handleBack = () => {
         this.props.handleTableActions('BACK')
     };
+
+    changeQty = (action, item_id) => {
+        this.props.changeQty(action, item_id)
+    }
 
     render() {
         const { order_items } = this.props;
@@ -30,6 +36,7 @@ export default class OrderDetails extends React.Component{
                     <CardText>Value.. {order_data.tag_value}</CardText>
                     <button>{order_data.tag_status}</button>
                     <h4 className='header'>Order Items</h4>
+                   
                     <Table>
                         <thead>
                             <tr>
@@ -42,16 +49,20 @@ export default class OrderDetails extends React.Component{
                         </thead>
                         <tbody>
                         {order_items.map((item, index)=>(
-                            <OrderItem item={item} />
+                            <OrderItem 
+                                item={item} 
+                                changeQty={this.changeQty}
+                            />
                         ))}
                         </tbody>
                     </Table>
+                    <Button color='warning' onClick={this.handleBack}>Back </Button>
                 </Card>
                 <Card>
                     <CardHeader>Actions</CardHeader>
                     <CardTitle>
-                        <Button color='primary' onClick={this.handleCloseTable}>Close Table</Button>
-                        <Button color='warning' onClick={this.handleBack}>Back </Button>
+                        <Button color='danger' onClick={this.handleCloseTable}>Close Table</Button>
+    
                     </CardTitle>
                 </Card>
 
@@ -60,26 +71,23 @@ export default class OrderDetails extends React.Component{
     }
 }
 
-class OrderItem extends React.Component{
+class OrderItem extends React.Component {
 
-    static PropTypes = {
-        item: PropTypes.object
-    };
-
-    static contextTypes = {
-        changeQty: PropTypes.func
-    };
+    static propTypes = {
+        changeQty: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired
+    }
 
     addQty = () => {
-       this.context.changeQty('ADD', this.props.item.id)
+       this.props.changeQty('ADD', this.props.item.id)
     };
 
     removeQty = () => {
-        this.context.changeQty('REMOVE', this.props.item.id)
+        this.props.changeQty('REMOVE', this.props.item.id)
     };
 
     handleDeleteItem = () => {
-        this.context.changeQty('DELETE', this.props.item.id)
+        this.props.changeQty('DELETE', this.props.item.id)
     };
 
 
