@@ -26,16 +26,6 @@ class Report extends React.Component {
         }
     }
 
-    static  childContextTypes = {
-        clearFilters: PropTypes.func
-    };
-
-    getChildContext(){
-        return{
-            clearFilters: this.handleClearFilters
-        }
-    }
-
     getOrders(endpoint, type_=false){
         const thisComp = this;
         fetchData(endpoint, thisComp, 'orders', type_)
