@@ -24,6 +24,10 @@ export default class ReportTotalData extends React.Component{
         this.props.updateReport(selected_categories)
     };
 
+    handleClearFilters = () => {
+        this.props.handleClearFilters()
+    };
+
     render(){
         if (this.state.toggleForm) {
             return (
@@ -33,6 +37,7 @@ export default class ReportTotalData extends React.Component{
                     <Filters
                         categories={this.props.categories}
                         handleSelectedCategories={this.handleSelectedCategories}
+                        clearFilters={this.handleClearFilters}
                     />
                 </div>
             )

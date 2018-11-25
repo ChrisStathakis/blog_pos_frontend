@@ -14,7 +14,7 @@ class Filters extends React.Component {
     }
 
 
-    static PropTypes = {
+    static propTypes = {
         categories: PropTypes.array.isRequired,
         clearFilters: PropTypes.func.isRequired,
         handleSelectedCategories: PropTypes.func.isRequired
@@ -59,7 +59,7 @@ class CheckBoxComponent extends React.Component{
         field: this.props.field||''
     };
 
-    static PropTypes = {
+    static propTypes = {
         handleSelectedCategories: PropTypes.func,
         field: PropTypes.object,
         checked: PropTypes.bool

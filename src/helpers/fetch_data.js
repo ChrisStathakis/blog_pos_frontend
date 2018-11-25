@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import {ORDER_ITEM_ENDPOINT, ORDER_ITEMS_ENDPOINT} from "./endpoints";
 
-function lookupOptionsPOST(data) {
+export function lookupOptionsPOST(data) {
     return {
         method: 'POST',
         headers: {
@@ -12,21 +12,21 @@ function lookupOptionsPOST(data) {
     }
 }
 
-let lookupOptionsGET = {
+export const lookupOptionsGET = {
     method: "GET",
     headers: {
         'Content-Type': 'application/json'
     }
 };
 
-let lookupOptionsDEL = {
+export const lookupOptionsDEL = {
     method: 'DELETE',
     headers: {
         'Content-Type': 'application/json'
     }
 };
 
-function lookupOptionsPUT(data) {
+export function lookupOptionsPUT(data) {
     return {
         method: 'PUT',
         headers: {
@@ -36,7 +36,7 @@ function lookupOptionsPUT(data) {
     }
 }
 
-function putData(endpoint, data) {
+export function putData(endpoint, data) {
     let lookupOptions = {
         method: 'PUT',
         headers: {
@@ -55,7 +55,7 @@ function putData(endpoint, data) {
     )
 }
 
-function fetchData(endpoint, thisComp, state, doneLoading) {
+export function fetchData(endpoint, thisComp, state, doneLoading) {
     fetch(endpoint, lookupOptionsGET).then(
       function (response) {
           return response.json()
@@ -71,7 +71,7 @@ function fetchData(endpoint, thisComp, state, doneLoading) {
     )
 }
 
-function postQtyChange(action, id, thisComp) {
+export function postQtyChange(action, id, thisComp) {
     let item;
     let data;
     const endpoint = ORDER_ITEM_ENDPOINT + `${id}/`;
@@ -143,7 +143,7 @@ function postQtyChange(action, id, thisComp) {
 }
 
 
-function addOrEditProduct(order_id, product_id, thisComp) {
+export function addOrEditProduct(order_id, product_id, thisComp) {
     const endpoint = ORDER_ITEMS_ENDPOINT + `?product_related=${product_id}&order_related=${order_id}`;
     fetch(endpoint, lookupOptionsGET).then(
         function(response){
@@ -187,4 +187,3 @@ function addOrEditProduct(order_id, product_id, thisComp) {
 
 
 
-export {fetchData, postQtyChange, putData, addOrEditProduct, lookupOptionsGET, lookupOptionsPOST}

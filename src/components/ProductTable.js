@@ -109,11 +109,11 @@ class ProductTable extends React.Component {
     static propTypes = {
         handleAddOrEditProduct: PropTypes.func.isRequired,
         products: PropTypes.string.isRequired
-    }
+    };
 
     handleAddOrEditProduct = (id) => {
         this.props.handleAddOrEditProduct(id)
-    }
+    };
 
     render(){
         const products = this.props.products;

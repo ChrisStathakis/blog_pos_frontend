@@ -6,7 +6,7 @@ import { Table,  Card, CardHeader,
 export default class OrderDetails extends React.Component{
 
 
-    static PropTypes = {
+    static propTypes = {
         handleTableActions: PropTypes.func,
         handleBack: PropTypes.func,
         order_items: PropTypes.array,

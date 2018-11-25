@@ -1,8 +1,6 @@
 import React from 'react';
 import MyNavbar from '../components/Navbar.js';
 import { Row, Col } from 'reactstrap';
-import ProductTable from '../components/ProductTable.js'
-import ProductForm from  '../components/ProductForm.js';
 import {PRODUCTS_ENDPOINT, CATEGORYS_ENDPOINT} from "../helpers/endpoints";
 import {fetchData} from "../helpers/fetch_data";
 

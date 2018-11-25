@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MyNavbar from '../components/Navbar.js';
 import {Container, Row, Col} from 'reactstrap';
 import {fetchData, lookupOptionsGET } from '../helpers/fetch_data.js'
@@ -7,6 +6,7 @@ import {withRouter} from "react-router-dom";
 import ReportGrid from '../components/ReportGrid.js'
 import ReportTotalData from "../components/ReportTotalData";
 import {ORDER_REPORT_ENDPOINT, TABLES_ENDPOINT, ORDERS_ENDPOINT} from "../helpers/endpoints";
+
 
 class Report extends React.Component {
 
@@ -95,6 +95,7 @@ class Report extends React.Component {
                                 handleSelectedCategories={this.handleSelectedCategories}
                                 updateReport={this.updateReport}
                                 reports={this.state.reports}
+                                handleClearFilters={this.handleClearFilters}
                             />
                         </Col>
                     </Row>

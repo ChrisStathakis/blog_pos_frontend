@@ -85,7 +85,7 @@ class Order extends React.Component{
                 <Container>
                     {this.state.doneLoading ?
                         <Row>
-                            <Col xs="6" sm="12">
+                            <Col xs="6" sm="6">
                                 <h4 className='header'>Products</h4>
                                 {doneLoading ?
                                     <ProductGrid
@@ -96,7 +96,7 @@ class Order extends React.Component{
                                 }
                                 
                             </Col>
-                            <Col xs="6" sm="12">
+                            <Col xs="6" sm="6">
                                 <h4 className='header'> Order Details </h4>
                                 <br />
                                 {doneLoading ?
